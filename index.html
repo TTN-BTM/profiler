@@ -348,12 +348,9 @@
         if (i === 0) {
           // First row is "new record"
           if (rowData.some(val => val.trim() !== '')) {
-            const passport = rowData[9]?.trim();
-            console.log('new ' + rowData[9]?.trim());
-            const duplicate = profileData.some(row => { 
-              console.log(row[9]?.trim());
-              if (row[9]?.trim() === passport) return true;
-            });
+            const passport = String(rowData[9] || '').trim();
+            // console.log('new ' + rowData[9]?.trim());
+            const duplicate = profileData.some(row => String(row[9] || '').trim() === passport);
             if (duplicate) {
               spinner.style.display = "none";
               showToast("Record already exists", true);
